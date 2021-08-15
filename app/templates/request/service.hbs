@@ -1,0 +1,5 @@
+{{page-title 'Service'}}
+{{#each @model as |service|}}
+
+  <Service @service={{service}} @selectService={{this.selectService}} />
+{{/each}}
