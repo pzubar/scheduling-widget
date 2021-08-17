@@ -7,20 +7,34 @@ module('Integration | Component | location-card', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    const locationStub = {
+      name: 'Test Name',
+      street: 'Test Street',
+      city: 'Test City',
+      state: 'Test State',
+      zip: 'Test Zip',
+      phone: '(066) 348-3622',
+    };
 
-    await render(hbs`<LocationCard />`);
+    this.set('location', locationStub);
+    this.set('selectLocation', () => {});
 
-    assert.dom(this.element).hasText('');
+    await render(
+      hbs`<LocationCard @location={{this.location}} @selectLocation={{this.selectLocation}}/>`
+    );
 
-    // Template block usage:
-    await render(hbs`
-      <LocationCard>
-        template block text
-      </LocationCard>
-    `);
-
-    assert.dom(this.element).hasText('template block text');
+    assert.deepEqual(
+      this.element.textContent
+        .trim()
+        .replace(/\s*\n+\s*/g, '\n')
+        .split('\n'),
+      [
+        locationStub.name,
+        locationStub.street,
+        [locationStub.city, locationStub.state, locationStub.zip].join(', '),
+        locationStub.phone,
+        'Select',
+      ]
+    );
   });
 });

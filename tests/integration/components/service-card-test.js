@@ -7,20 +7,24 @@ module('Integration | Component | service-card', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    const serviceStub = {
+      description: 'Test desctiption',
+      duration: 100,
+    };
 
-    await render(hbs`<ServiceCard />`);
+    this.set('service', serviceStub);
+    this.set('selectService', () => {});
 
-    assert.dom(this.element).hasText('');
+    await render(
+      hbs`<ServiceCard @service={{this.service}} @selectService={{this.selectService}}/>`
+    );
 
-    // Template block usage:
-    await render(hbs`
-      <ServiceCard>
-        template block text
-      </ServiceCard>
-    `);
-
-    assert.dom(this.element).hasText('template block text');
+    assert.deepEqual(
+      this.element.textContent
+        .trim()
+        .replace(/\s*\n+\s*/g, '\n')
+        .split('\n'),
+      [serviceStub.description, `${serviceStub.duration} minutes`, 'Select']
+    );
   });
 });

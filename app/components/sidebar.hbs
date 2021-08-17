@@ -11,7 +11,6 @@
     <Sidebar::SidebarItem
       @stage='2'
       @title='Select a service'
-      @disabled={{unless @request.service true false}}
       @route='request.service'
     >
       {{#if @request.service}}
@@ -22,12 +21,20 @@
     <Sidebar::SidebarItem
       @stage='3'
       @title='Select a location'
-      @disabled={{unless @request.location true false}}
+      @disabled={{not @request.service}}
       @route='request.location'
     >
-      {{#if @request.location}}
-        LOCATION
-      {{/if}}
+      {{@request.location.name}}
     </Sidebar::SidebarItem>
+    <Sidebar::SidebarItem
+      @stage='4'
+      @title='Select date & time'
+      @disabled={{true}}
+    />
+    <Sidebar::SidebarItem
+      @stage='5'
+      @title='Your information'
+      @disabled={{true}}
+    />
   </div>
 </nav>

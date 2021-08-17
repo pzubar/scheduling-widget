@@ -7,53 +7,24 @@ export default class RequestLocationRoute extends Route {
   @service router;
 
   model() {
-    // const { request } = this.modelFor('request');
-    // const { service } = request;
-    //
-    // return this.store.query('location', {
-    //   filter: {
-    //     clinicianId: this.configuration.clinicianId,
-    //     cptCodeId: service.id,
-    //   },
-    // });
-    return [
-      {
-        city: 'Colorado Springs',
-        name: 'Satellite Office',
-        state: 'CO',
-        street: '10125 Federal Dr #100',
-        zip: '80908',
-        phone: '(626) 298-1956',
-        isVideo: false,
+    const { request } = this.modelFor('request');
+    const { service } = request;
+
+    return this.store.query('location', {
+      filter: {
+        clinicianId: this.configuration.clinicianId,
+        cptCodeId: service.id,
       },
-      {
-        city: 'Colorado Springs',
-        name: 'Satellite Office',
-        state: 'CO',
-        street: '10125 Federal Dr #100',
-        zip: '80908',
-        phone: '(626) 298-1956',
-        isVideo: false,
-      },
-      {
-        city: 'Colorado Springs',
-        name: 'Satellite Office',
-        state: 'CO',
-        street: '10125 Federal Dr #100',
-        zip: '80908',
-        phone: '(626) 298-1956',
-        isVideo: false,
-      },
-    ];
+    });
   }
 
   beforeModel(transition) {
-    // super.beforeModel(transition);
-    // const { request } = this.modelFor('request');
-    // const { service } = request;
-    //
-    // if (!service) {
-    //   this.router.transitionTo('request.service');
-    // }
+    super.beforeModel(transition);
+    const { request } = this.modelFor('request');
+    const { service } = request;
+
+    if (!service) {
+      this.router.transitionTo('request.service');
+    }
   }
 }

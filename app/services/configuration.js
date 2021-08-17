@@ -5,7 +5,7 @@ export default class ConfigurationService extends Service {
   clinicianId = ENV.APP.clinicianID;
   baseUrl = ENV.APP.baseUrl;
 
-  set({ clinicianId, baseUrl }) {
+  set({ clinicianId = this.clinicianId, baseUrl = this.baseUrl }) {
     this.clinicianId = clinicianId;
     this.baseUrl = baseUrl;
   }

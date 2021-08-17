@@ -9,9 +9,7 @@ export default class RequestRoute extends Route {
   model(params) {
     const { clinicianId, baseUrl } = params;
 
-    if (clinicianId || baseUrl) {
-      this.configuration.set({ clinicianId, baseUrl });
-    }
+    this.configuration.set({ clinicianId, baseUrl });
 
     if (this.configuration.clinicianId && this.configuration.baseUrl) {
       const clinician = this.store.findRecord(
@@ -20,7 +18,7 @@ export default class RequestRoute extends Route {
       );
       const request = this.store.createRecord('request');
 
-      // this.router.transitionTo('request.service');
+      this.router.transitionTo('request.service');
       return { clinician, request };
     } else {
       this.router.transitionTo('index');
