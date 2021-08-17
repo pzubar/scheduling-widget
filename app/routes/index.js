@@ -9,6 +9,6 @@ export default class IndexRoute extends Route {
   beforeModel(transition) {
     super.beforeModel(transition);
 
-    this.router.transitionTo('request');
+    // this.router.transitionTo('request');
   }
 }

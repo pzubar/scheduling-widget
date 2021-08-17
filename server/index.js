@@ -1,7 +1,6 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-const API_URL = 'https://johnny-appleseed.clientsecure.me';
 const app = express();
 
 const customRouter = function (req) {
@@ -11,7 +10,7 @@ const customRouter = function (req) {
 app.use(
   '/api',
   createProxyMiddleware({
-    target: API_URL,
+    target: '',
     router: customRouter,
     changeOrigin: true,
     pathRewrite: (path) => path.replace('/api', '/client-portal-api'),

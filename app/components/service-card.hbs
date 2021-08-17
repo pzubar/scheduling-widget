@@ -1,0 +1,19 @@
+<div class='w-11/12 mx-auto my-2 bg-white'>
+  <div
+    class='rounded shadow p-4 flex flex-row justify-between leading-normal items-center'
+  >
+    <div class='w-4/5'>
+      <div class='text-gray-900 text-xl mb-2'>
+        {{@service.description}}
+      </div>
+      <p class='text-gray-700 text-base'>
+        {{pluralize @service.duration 'minute'}}
+      </p>
+    </div>
+    <div class='w-1/5 text-right'>
+      <Ui::Button @class='w-full' @onClick={{(fn @selectService @service)}}>
+        Select
+      </Ui::Button>
+    </div>
+  </div>
+</div>

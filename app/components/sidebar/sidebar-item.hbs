@@ -1,0 +1,25 @@
+<div class='mb-4'>
+  <div class='{{if @disabled 'pointer-events-none'}}'>
+    <LinkTo
+      @route={{@route}}
+      class='{{if @disabled 'text-gray-300' 'text-black'}}
+        flex no-underline flex-col'
+    >
+      <div class='flex items-center tracking-wide uppercase'>
+        <div
+          class='border rounded-full mr-1 w-6 h-6 flex justify-center items-center'
+        >
+          {{@stage}}
+        </div>
+        <div>
+          {{@title}}
+        </div>
+
+      </div>
+      <div class='text-blue-500 pl-7'>
+        {{yield}}
+      </div>
+    </LinkTo>
+  </div>
+
+</div>

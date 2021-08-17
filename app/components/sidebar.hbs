@@ -1,0 +1,33 @@
+<nav class='sidebar-root'>
+  <div class='pt-4'>
+    <Sidebar::SidebarItem
+      @stage='1'
+      @title='Clinician'
+      @route='request.service'
+    >
+      {{@clinician.firstName}}
+      {{@clinician.lastName}}
+    </Sidebar::SidebarItem>
+    <Sidebar::SidebarItem
+      @stage='2'
+      @title='Select a service'
+      @disabled={{unless @request.service true false}}
+      @route='request.service'
+    >
+      {{#if @request.service}}
+        {{@request.service.description}}<br />
+        {{pluralize @request.service.duration 'minute'}}
+      {{/if}}
+    </Sidebar::SidebarItem>
+    <Sidebar::SidebarItem
+      @stage='3'
+      @title='Select a location'
+      @disabled={{unless @request.location true false}}
+      @route='request.location'
+    >
+      {{#if @request.location}}
+        LOCATION
+      {{/if}}
+    </Sidebar::SidebarItem>
+  </div>
+</nav>
