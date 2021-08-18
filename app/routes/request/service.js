@@ -17,7 +17,8 @@ export default class RequestServiceRoute extends Route {
   beforeModel(transition) {
     super.beforeModel(transition);
     const request = this.modelFor('request');
-    console.log("WTF")
+
+    request.location = undefined;
     if (!request.clinician) {
       this.router.transitionTo('request');
     }
