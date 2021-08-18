@@ -2,11 +2,12 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import convertElementContentToArray from '../../utils/convert-content-to-array';
 
 module('Integration | Component | service-card', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
+  test('it renders properly', async function (assert) {
     const serviceStub = {
       description: 'Test desctiption',
       duration: 100,
@@ -19,12 +20,10 @@ module('Integration | Component | service-card', function (hooks) {
       hbs`<ServiceCard @service={{this.service}} @selectService={{this.selectService}}/>`
     );
 
-    assert.deepEqual(
-      this.element.textContent
-        .trim()
-        .replace(/\s*\n+\s*/g, '\n')
-        .split('\n'),
-      [serviceStub.description, `${serviceStub.duration} minutes`, 'Select']
-    );
+    assert.deepEqual(convertElementContentToArray(this.element), [
+      serviceStub.description,
+      `${serviceStub.duration} minutes`,
+      'Select',
+    ]);
   });
 });

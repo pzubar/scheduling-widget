@@ -5,13 +5,13 @@
       @title='Clinician'
       @route='request.service'
     >
-      {{@clinician.firstName}}
-      {{@clinician.lastName}}
+      {{concat @request.clinician.firstName ' ' @request.clinician.lastName}}
     </Sidebar::SidebarItem>
     <Sidebar::SidebarItem
       @stage='2'
       @title='Select a service'
       @route='request.service'
+      @disabled={{not @request.clinician}}
     >
       {{#if @request.service}}
         {{@request.service.description}}<br />
@@ -25,6 +25,7 @@
       @route='request.location'
     >
       {{@request.location.name}}
+      {{@request.location.phone}}
     </Sidebar::SidebarItem>
     <Sidebar::SidebarItem
       @stage='4'

@@ -11,7 +11,7 @@ export default class RequestServiceController extends Controller {
     const requests = this.store.peekAll('request');
     const request = requests.objectAt(0);
 
-    request.service = service;
+    request.set('service', service);
     this.router.transitionTo('request.location');
   }
 }

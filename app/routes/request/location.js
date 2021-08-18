@@ -7,20 +7,20 @@ export default class RequestLocationRoute extends Route {
   @service router;
 
   model() {
-    const { request } = this.modelFor('request');
+    const request = this.modelFor('request');
     const { service } = request;
 
     return this.store.query('location', {
       filter: {
         clinicianId: this.configuration.clinicianId,
-        cptCodeId: service.id,
+        cptCodeId: service.get('id'),
       },
     });
   }
 
   beforeModel(transition) {
     super.beforeModel(transition);
-    const { request } = this.modelFor('request');
+    const request = this.modelFor('request');
     const { service } = request;
 
     if (!service) {

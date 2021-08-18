@@ -1,6 +1,7 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { belongsTo } from '@ember-data/model';
 
 export default class RequestModel extends Model {
-  @attr service;
-  @attr location;
+  @belongsTo('clinician') clinician;
+  @belongsTo('service') service;
+  @belongsTo('location') location;
 }

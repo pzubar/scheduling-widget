@@ -6,21 +6,38 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | sidebar', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it renders properly when the request data is set', async function (assert) {
+    const requestStub = {
+      clinician: {
+        firstName: 'Testy',
+        lastName: 'McTest',
+      },
+      service: {
+        description: 'Lorem Ipsum',
+        duration: 1,
+      },
+      location: {
+        name: 'Test Location',
+        phone: '066 348 36 22',
+      },
+    };
+    this.set('request', requestStub);
 
-    await render(hbs`<Sidebar />`);
+    await render(hbs`<Sidebar @request={{this.request}} />`);
 
-    assert.dom(this.element).hasText('');
+    const { clinician, service, location } = requestStub;
+    const { firstName, lastName } = clinician;
+    const { description, duration } = service;
 
-    // Template block usage:
-    await render(hbs`
-      <Sidebar>
-        template block text
-      </Sidebar>
-    `);
+    // Clinician info is shown
+    assert.dom(this.element).includesText(`${firstName} ${lastName}`);
 
-    assert.dom(this.element).hasText('template block text');
+    // Service info is shown
+    assert.dom(this.element).includesText(description);
+    assert.dom(this.element).includesText(`${duration} minute`);
+
+    // Location info is shown
+    assert.dom(this.element).includesText(location.name);
+    assert.dom(this.element).includesText(location.phone);
   });
 });

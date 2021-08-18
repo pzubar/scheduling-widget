@@ -12,14 +12,18 @@ export default class RequestRoute extends Route {
     this.configuration.set({ clinicianId, baseUrl });
 
     if (this.configuration.clinicianId && this.configuration.baseUrl) {
-      const clinician = this.store.findRecord(
-        'clinician',
-        this.configuration.clinicianId
-      );
-      const request = this.store.createRecord('request');
+      const request = this.store.createRecord('request', {});
 
-      this.router.transitionTo('request.service');
-      return { clinician, request };
+      this.store
+        .findRecord('clinician', this.configuration.clinicianId)
+        .then((clinicianRecord) => {
+          request.clinician = clinicianRecord;
+
+          this.router.transitionTo('request.service');
+        })
+        .catch(() => this.router.transitionTo('index'));
+
+      return request;
     } else {
       this.router.transitionTo('index');
     }

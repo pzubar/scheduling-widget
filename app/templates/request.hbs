@@ -1,15 +1,16 @@
 {{page-title 'Request'}}
 
-<header class='border-b border-t border-grey-dark py-4 px-4 flex bg-white items-baseline'>
+<header
+  class='border-b border-t border-grey-dark py-4 px-4 flex bg-white items-baseline'
+>
   <h1 class='text-xl font-normal mr-4'>Request an Appointment</h1>
   <h2 class='text-base font-thin'>The Therapy Center</h2>
 </header>
 <main class='flex h-full'>
-  <div class='flex flex-col justify-between w-4/12 bg-white px-4 hidden md:block'>
-    <Sidebar
-      @clinician={{this.model.clinician}}
-      @request={{this.model.request}}
-    />
+  <div
+    class='flex flex-col justify-between w-4/12 bg-white px-4 hidden md:block'
+  >
+    <Sidebar @request={{this.model}} />
   </div>
   <div class='flex flex-col justify-between md:w-8/12 bg-gray-100 w-full'>
     <section class='bg-gray'>
